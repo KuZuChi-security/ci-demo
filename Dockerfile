@@ -3,4 +3,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
+ARG GIT_COMMIT=unset
+ARG BUILD_NUMBER=unset
+ENV GIT_COMMIT=$GIT_COMMIT BUILD_NUMBER=$BUILD_NUMBER
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

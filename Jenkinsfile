@@ -8,7 +8,7 @@ pipeline {
       steps {
         sh 'docker version'
         script { env.TAG = env.GIT_COMMIT.take(7) }
-        sh 'docker build -t $IMAGE:$TAG .'
+        sh 'docker build --build-arg GIT_COMMIT=$TAG --build-arg BUILD_NUMBER=$BUILD_NUMBER -t $IMAGE:$TAG .'
       }
     }
     stage('Push image') {
